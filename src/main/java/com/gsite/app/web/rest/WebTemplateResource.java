@@ -83,12 +83,14 @@ public class WebTemplateResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/web-templates/{id}")
+   @DeleteMapping("/web-templates/{id}")
     @Timed
     public ResponseEntity<Void> deleteWebTemplate(@PathVariable String id) {
         log.debug("REST request to delete WebTemplate : {}", id);
-        webTemplateService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("webTemplate", id.toString())).build();
+        if (webTemplateService.delete(id))
+            return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("webTemplate", id.toString())).build();
+        else
+            return ResponseEntity.badRequest().build();
     }
 
 

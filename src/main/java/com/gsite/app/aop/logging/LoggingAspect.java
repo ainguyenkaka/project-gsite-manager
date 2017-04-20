@@ -1,7 +1,6 @@
 package com.gsite.app.aop.logging;
 
 import io.github.jhipster.config.JHipsterConstants;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -14,11 +13,6 @@ import org.springframework.core.env.Environment;
 
 import java.util.Arrays;
 
-/**
- * Aspect for logging execution of service and repository Spring components.
- *
- * By default, it only runs with the "dev" profile.
- */
 @Aspect
 public class LoggingAspect {
 
@@ -30,17 +24,12 @@ public class LoggingAspect {
         this.env = env;
     }
 
-    /**
-     * Pointcut that matches all repositories, services and Web REST endpoints.
-     */
+
     @Pointcut("within(com.gsite.app.repository..*) || within(com.gsite.app.service..*) || within(com.gsite.app.web.rest..*)")
     public void loggingPointcut() {
-        // Method is empty as this is just a Pointcut, the implementations are in the advices.
+
     }
 
-    /**
-     * Advice that logs methods throwing exceptions.
-     */
     @AfterThrowing(pointcut = "loggingPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
         if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT)) {
@@ -53,9 +42,7 @@ public class LoggingAspect {
         }
     }
 
-    /**
-     * Advice that logs when a method is entered and exited.
-     */
+
     @Around("loggingPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         if (log.isDebugEnabled()) {

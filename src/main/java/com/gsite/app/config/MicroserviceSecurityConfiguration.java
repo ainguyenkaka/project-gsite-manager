@@ -3,7 +3,6 @@ package com.gsite.app.config;
 import com.gsite.app.security.AuthoritiesConstants;
 import com.gsite.app.security.jwt.JWTConfigurer;
 import com.gsite.app.security.jwt.TokenProvider;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

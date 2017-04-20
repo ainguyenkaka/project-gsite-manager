@@ -1,33 +1,23 @@
 package com.gsite.app.web.rest;
 
-import com.gsite.app.domain.WebTemplate;
-import com.gsite.app.service.WebTemplateService;
-import com.gsite.app.service.WebsiteService;
 import com.codahale.metrics.annotation.Timed;
 import com.gsite.app.domain.Website;
-
-import com.gsite.app.repository.WebsiteRepository;
+import com.gsite.app.service.WebsiteService;
 import com.gsite.app.web.rest.util.HeaderUtil;
-
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * REST controller for managing Website.
- */
 @RestController
 @RequestMapping("/api")
 public class WebsiteResource {
@@ -37,16 +27,6 @@ public class WebsiteResource {
     @Inject
     private WebsiteService websiteService;
 
-    @Inject
-    private WebTemplateService webTemplateService;
-
-    /**
-     * POST  /websites : Create a new website.
-     *
-     * @param website the website to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new website, or with status 400 (Bad Request) if the website has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
     @PostMapping("/websites")
     @Timed
     public ResponseEntity<Website> createWebsite(@Valid @RequestBody Website website) throws URISyntaxException {
@@ -63,16 +43,6 @@ public class WebsiteResource {
             .body(result);
     }
 
-
-    /**
-     * PUT  /websites : Updates an existing website.
-     *
-     * @param website the website to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated website,
-     * or with status 400 (Bad Request) if the website is not valid,
-     * or with status 500 (Internal Server Error) if the website couldnt be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
     @PutMapping("/websites")
     @Timed
     public ResponseEntity<Website> updateWebsite(@Valid @RequestBody Website website) throws URISyntaxException {
@@ -86,11 +56,7 @@ public class WebsiteResource {
             .body(result);
     }
 
-    /**
-     * GET  /websites : get all the websites.
-     *
-     * @return the ResponseEntity with status 200 (OK) and the list of websites in body
-     */
+
     @GetMapping("/websites")
     @Timed
     public List<Website> getAllWebsites() {
@@ -99,12 +65,7 @@ public class WebsiteResource {
         return websites;
     }
 
-    /**
-     * GET  /websites/:id : get the "id" website.
-     *
-     * @param id the id of the website to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the website, or with status 404 (Not Found)
-     */
+
     @GetMapping("/websites/{id}")
     @Timed
     public ResponseEntity<Website> getWebsite(@PathVariable String id) {
@@ -117,13 +78,6 @@ public class WebsiteResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-
-    /**
-     * DELETE  /websites/:id : delete the "id" website.
-     *
-     * @param id the id of the website to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
     @DeleteMapping("/websites/{id}")
     @Timed
     public ResponseEntity<Void> deleteWebsite(@PathVariable String id) {

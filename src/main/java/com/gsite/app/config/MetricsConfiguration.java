@@ -1,25 +1,24 @@
 package com.gsite.app.config;
 
-import io.github.jhipster.config.JHipsterProperties;
-import io.github.jhipster.config.metrics.SpectatorLogMetricWriter;
-
-import com.netflix.spectator.api.Registry;
-import org.springframework.boot.actuate.autoconfigure.ExportMetricReader;
-import org.springframework.boot.actuate.autoconfigure.ExportMetricWriter;
-import org.springframework.boot.actuate.metrics.writer.MetricWriter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.cloud.netflix.metrics.spectator.SpectatorMetricReader;
-
 import com.codahale.metrics.JmxReporter;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Slf4jReporter;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import com.codahale.metrics.jvm.*;
+import com.netflix.spectator.api.Registry;
 import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
 import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
+import io.github.jhipster.config.JHipsterProperties;
+import io.github.jhipster.config.metrics.SpectatorLogMetricWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.*;
+import org.springframework.boot.actuate.autoconfigure.ExportMetricReader;
+import org.springframework.boot.actuate.autoconfigure.ExportMetricWriter;
+import org.springframework.boot.actuate.metrics.writer.MetricWriter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cloud.netflix.metrics.spectator.SpectatorMetricReader;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.lang.management.ManagementFactory;
@@ -82,7 +81,6 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
         }
     }
 
-    /* Spectator metrics log reporting */
     @Bean
     @ConditionalOnProperty("jhipster.logging.spectator-metrics.enabled")
     @ExportMetricReader

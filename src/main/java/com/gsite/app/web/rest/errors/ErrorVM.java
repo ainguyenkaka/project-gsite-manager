@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * View Model for transferring error message with a list of field errors.
- */
 public class ErrorVM implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -2,9 +2,6 @@ package com.gsite.app.web.rest.errors;
 
 import java.io.Serializable;
 
-/**
- * View Model for sending a parameterized error message.
- */
 public class ParameterizedErrorVM implements Serializable {
 
     private static final long serialVersionUID = 1L;

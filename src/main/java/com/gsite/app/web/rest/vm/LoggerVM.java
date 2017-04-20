@@ -3,9 +3,6 @@ package com.gsite.app.web.rest.vm;
 import ch.qos.logback.classic.Logger;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-/**
- * View Model object for storing a Logback logger.
- */
 public class LoggerVM {
 
     private String name;
@@ -19,7 +16,6 @@ public class LoggerVM {
 
     @JsonCreator
     public LoggerVM() {
-        // Empty public constructor used by Jackson.
     }
 
     public String getName() {

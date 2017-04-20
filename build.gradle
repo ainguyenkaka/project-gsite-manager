@@ -11,12 +11,10 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.1"
         classpath "net.ltgt.gradle:gradle-apt-plugin:0.9"
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${spring_boot_version}"
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
         classpath "io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE"
-        //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
     }
 }
 
@@ -79,10 +77,6 @@ if (OperatingSystem.current().isWindows()) {
 test {
     include '**/*UnitTest*'
     include '**/*IntTest*'
-
-    // uncomment if the tests reports are not generated
-    // see https://github.com/jhipster/generator-jhipster/pull/2771 and https://github.com/jhipster/generator-jhipster/pull/4484
-    // ignoreFailures true
     reports.html.enabled = false
 }
 
@@ -91,10 +85,8 @@ task testReport(type: TestReport) {
     reportOn test
 }
 
-apply from: 'gradle/sonar.gradle'
 apply from: 'gradle/mapstruct.gradle'
 apply from: 'gradle/docker.gradle'
-//jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
 
 if (project.hasProperty('prod')) {
     apply from: 'gradle/profile_prod.gradle'
@@ -118,8 +110,7 @@ description = ''
 configurations {
     providedRuntime
     compile.exclude module: "spring-boot-starter-tomcat"
-    // netty's native is pulled by spring-cloud-starter-ribbon, but is useless unless you explicitly add the native binary dependency.
-    // Having it in the classpath without the binary can cause warnings
+
     all*.exclude group: 'io.netty', module: 'netty-transport-native-epoll'
 }
 
@@ -134,7 +125,7 @@ repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url 'http://repo.maven.apache.org/maven2' }
     maven {
-        url "https://github.com/ainguyenkaka/gsite/raw/master"
+        url "https://github.com/ainguyenkaka/gsite-jpa/raw/master"
     }
 }
 
@@ -206,7 +197,6 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-library"
     testCompile "com.h2database:h2"
     optional "org.springframework.boot:spring-boot-configuration-processor:${spring_boot_version}"
-    //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 
 clean {

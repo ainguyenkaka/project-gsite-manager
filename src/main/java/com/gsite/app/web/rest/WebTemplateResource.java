@@ -5,7 +5,6 @@ import com.gsite.app.domain.WebTemplate;
 import com.gsite.app.service.WebTemplateService;
 import com.gsite.app.web.rest.util.HeaderUtil;
 import com.gsite.app.web.rest.util.PaginationUtil;
-
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

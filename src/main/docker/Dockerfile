@@ -3,7 +3,6 @@ FROM openjdk:8-jre-alpine
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
     JHIPSTER_SLEEP=0
 
-# add directly the war
 ADD *.war /app.war
 
 VOLUME /tmp

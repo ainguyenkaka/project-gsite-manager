@@ -1,7 +1,6 @@
 package com.gsite.app.config;
 
 import io.github.jhipster.config.locale.AngularCookieLocaleResolver;
-
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +15,7 @@ public class LocaleConfiguration extends WebMvcConfigurerAdapter implements Envi
 
     @Override
     public void setEnvironment(Environment environment) {
-        // unused
+
     }
 
     @Bean(name = "localeResolver")

@@ -1,34 +1,33 @@
-node {
-    stage('checkout') {
-        checkout scm
-    }
-
-    stage('clean') {
-        sh "./gradlew clean"
-    }
-
-    stage('backend tests') {
-        try {
-            sh "./gradlew test"
-        } catch(err) {
-            throw err
+pipeline {
+    agent any
+    stages {
+        stage('checkout') {
+            steps {
+                checkout scm
+            }
         }
-    }
 
-    stage('packaging') {
-        sh "./gradlew bootRepackage -Pprod -x test"
-    }
+        stage('clean') {
+            steps {
+                sh "./gradlew clean"
+            }
+        }
 
-    stage('imaging') {
-        sh "./gradlew bootRepackage -Pprod buildDocker"
-    }
+        stage('build') {
+            steps {
+                parallel(
+                    "build": {
+                        sh './gradlew build -Pprod'
 
-    stage('pushing') {
-        sh "sudo docker tag ainguyen/gsite-micro-manager localhost:5000/gsite-micro-manager"
-        sh "sudo docker push localhost:5000/gsite-micro-manager"
-    }
+                    },
+                    "test": {
+                        sh './gradlew test'
 
-     stage('updating service') {
-        sh "sudo docker service update gscloud_gsite-manager"
+                    }
+                )
+            }
+        }
+
+
     }
 }

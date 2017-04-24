@@ -103,7 +103,7 @@ if (project.hasProperty('prometheus')) {
 }
 
 group = 'com.gsite.app'
-version = '0.0.1-SNAPSHOT'
+version = '1.0'
 
 description = ''
 

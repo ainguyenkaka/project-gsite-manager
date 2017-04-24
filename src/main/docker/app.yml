@@ -1,0 +1,16 @@
+version: '3'
+services:
+    gsitemanager-app:
+        image: ainguyen/gsite-micro-manager
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATA_MONGODB_URI=mongodb://gsitemanager-mongodb:27017
+            - SPRING_DATA_MONGODB_DATABASE=gsiteManager
+        ports:
+            - 8082:8082
+        depends_on:
+            - gsitemanager-mongodb
+    gsitemanager-mongodb:
+        image: mongo:3.2.10
+        ports:
+            - 27017:27017

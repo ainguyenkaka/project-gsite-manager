@@ -233,6 +233,22 @@ public class WebsiteResourceIntTest {
             .andExpect(jsonPath("$.domain").value(DEFAULT_DOMAIN.toString()));
     }
 
+
+    @Test
+    public void getWebsiteByDomain() throws Exception {
+        websiteRepository.save(website);
+
+        restWebsiteMockMvc.perform(get("/api/websites/domain").param("domain", website.getDomain()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.id").value(website.getId()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+            .andExpect(jsonPath("$.created").value(sameInstant(DEFAULT_CREATED)))
+            .andExpect(jsonPath("$.user_id").value(DEFAULT_USER_ID.toString()))
+            .andExpect(jsonPath("$.template").value(DEFAULT_TEMPLATE_ID.toString()))
+            .andExpect(jsonPath("$.domain").value(DEFAULT_DOMAIN.toString()));
+    }
+
     @Test
     public void getNonExistingWebsite() throws Exception {
         restWebsiteMockMvc.perform(get("/api/websites/{id}", Long.MAX_VALUE))

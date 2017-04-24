@@ -39,9 +39,6 @@ public class GsiteManagerApp {
         if (activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_PRODUCTION)) {
             log.error("should not run with both the 'dev' and prod profiles at the same time.");
         }
-        if (activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT) && activeProfiles.contains(JHipsterConstants.SPRING_PROFILE_CLOUD)) {
-            log.error("should not run with both the 'dev' and cloud profiles at the same time.");
-        }
     }
 
     public static void main(String[] args) throws UnknownHostException {

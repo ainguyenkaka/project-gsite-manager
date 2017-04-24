@@ -1,5 +1,6 @@
 package com.gsite.app.security.jwt;
 
+import com.gsite.app.security.AuthoritiesConstants;
 import io.github.jhipster.config.JHipsterProperties;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
@@ -63,6 +64,17 @@ public class TokenProvider {
         return Jwts.builder()
             .setSubject(authentication.getName())
             .claim(AUTHORITIES_KEY, authorities)
+            .signWith(SignatureAlgorithm.HS512, secretKey)
+            .setExpiration(validity)
+            .compact();
+    }
+
+    public static  String createTestToken(String secretKey) {
+        long now = (new Date()).getTime();
+        Date validity = new Date(now + 1800 * 1000);
+        return Jwts.builder()
+            .setSubject("test")
+            .claim(AUTHORITIES_KEY, AuthoritiesConstants.MANAGER)
             .signWith(SignatureAlgorithm.HS512, secretKey)
             .setExpiration(validity)
             .compact();

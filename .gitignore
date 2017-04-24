@@ -1,24 +1,4 @@
 ######################
-# Project Specific
-######################
-/build/www/**
-/src/test/javascript/coverage/
-/src/test/javascript/PhantomJS*/
-
-######################
-# Node
-######################
-/node/
-node_tmp/
-node_modules/
-npm-debug.log.*
-
-######################
-# SASS
-######################
-.sass-cache/
-
-######################
 # Eclipse
 ######################
 *.pydevproject

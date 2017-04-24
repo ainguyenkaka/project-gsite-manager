@@ -1,17 +1,15 @@
 package com.gsite.app.config;
 
-import io.github.jhipster.config.JHipsterConstants;
-import io.github.jhipster.domain.util.JSR310DateConverters.*;
-
-import com.mongodb.Mongo;
 import com.github.mongobee.Mongobee;
+import com.mongodb.Mongo;
+import io.github.jhipster.domain.util.JSR310DateConverters.DateToZonedDateTimeConverter;
+import io.github.jhipster.domain.util.JSR310DateConverters.ZonedDateTimeToDateConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
@@ -24,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-@Profile("!" + JHipsterConstants.SPRING_PROFILE_CLOUD)
 @EnableMongoRepositories("com.gsite.app.repository")
 @Import(value = MongoAutoConfiguration.class)
 @EnableMongoAuditing(auditorAwareRef = "springSecurityAuditorAware")

@@ -3,7 +3,7 @@ package com.gsite.app.config;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
-import io.github.jhipster.config.JHipsterProperties;
+
 import io.undertow.UndertowOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,14 +30,14 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 
     private final Environment env;
 
-    private final JHipsterProperties jHipsterProperties;
+    private final ApplicationProperties applicationProperties;
 
     private MetricRegistry metricRegistry;
 
-    public WebConfigurer(Environment env, JHipsterProperties jHipsterProperties) {
+    public WebConfigurer(Environment env, ApplicationProperties applicationProperties) {
 
         this.env = env;
-        this.jHipsterProperties = jHipsterProperties;
+        this.applicationProperties = applicationProperties;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
         mappings.add("json", "text/html;charset=utf-8");
         container.setMimeMappings(mappings);
 
-        if (jHipsterProperties.getHttp().getVersion().equals(JHipsterProperties.Http.Version.V_2_0) &&
+        if (applicationProperties.getHttp().getVersion().equals(ApplicationProperties.Http.Version.V_2_0) &&
             container instanceof UndertowEmbeddedServletContainerFactory) {
 
             ((UndertowEmbeddedServletContainerFactory) container)
@@ -92,7 +92,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = jHipsterProperties.getCors();
+        CorsConfiguration config = applicationProperties.getCors();
         if (config.getAllowedOrigins() != null && !config.getAllowedOrigins().isEmpty()) {
             log.debug("Registering CORS filter");
             source.registerCorsConfiguration("/api/**", config);

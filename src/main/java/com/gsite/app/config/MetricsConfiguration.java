@@ -8,7 +8,7 @@ import com.codahale.metrics.jvm.*;
 import com.netflix.spectator.api.Registry;
 import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
 import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
-import io.github.jhipster.config.JHipsterProperties;
+
 import io.github.jhipster.config.metrics.SpectatorLogMetricWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,10 +39,10 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
 
     private HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry();
 
-    private final JHipsterProperties jHipsterProperties;
+    private final ApplicationProperties applicationProperties;
 
-    public MetricsConfiguration(JHipsterProperties jHipsterProperties) {
-        this.jHipsterProperties = jHipsterProperties;
+    public MetricsConfiguration(ApplicationProperties applicationProperties) {
+        this.applicationProperties = applicationProperties;
     }
 
     @Override
@@ -65,24 +65,24 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
         metricRegistry.register(PROP_METRIC_REG_JVM_THREADS, new ThreadStatesGaugeSet());
         metricRegistry.register(PROP_METRIC_REG_JVM_FILES, new FileDescriptorRatioGauge());
         metricRegistry.register(PROP_METRIC_REG_JVM_BUFFERS, new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
-        if (jHipsterProperties.getMetrics().getJmx().isEnabled()) {
+        if (applicationProperties.getMetrics().getJmx().isEnabled()) {
             log.debug("Initializing Metrics JMX reporting");
             JmxReporter jmxReporter = JmxReporter.forRegistry(metricRegistry).build();
             jmxReporter.start();
         }
-        if (jHipsterProperties.getMetrics().getLogs().isEnabled()) {
+        if (applicationProperties.getMetrics().getLogs().isEnabled()) {
             log.info("Initializing Metrics Log reporting");
             final Slf4jReporter reporter = Slf4jReporter.forRegistry(metricRegistry)
                 .outputTo(LoggerFactory.getLogger("metrics"))
                 .convertRatesTo(TimeUnit.SECONDS)
                 .convertDurationsTo(TimeUnit.MILLISECONDS)
                 .build();
-            reporter.start(jHipsterProperties.getMetrics().getLogs().getReportFrequency(), TimeUnit.SECONDS);
+            reporter.start(applicationProperties.getMetrics().getLogs().getReportFrequency(), TimeUnit.SECONDS);
         }
     }
 
     @Bean
-    @ConditionalOnProperty("jhipster.logging.spectator-metrics.enabled")
+    @ConditionalOnProperty("application.logging.spectator-metrics.enabled")
     @ExportMetricReader
     public SpectatorMetricReader SpectatorMetricReader(Registry registry) {
         log.info("Initializing Spectator Metrics Log reporting");
@@ -90,7 +90,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter {
     }
 
     @Bean
-    @ConditionalOnProperty("jhipster.logging.spectator-metrics.enabled")
+    @ConditionalOnProperty("application.logging.spectator-metrics.enabled")
     @ExportMetricWriter
     MetricWriter metricWriter() {
         return new SpectatorLogMetricWriter();

@@ -1,6 +1,7 @@
 package com.gsite.app.aop.logging;
 
-import io.github.jhipster.config.JHipsterConstants;
+
+import com.gsite.app.config.ApplicationConstants;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -32,7 +33,7 @@ public class LoggingAspect {
 
     @AfterThrowing(pointcut = "loggingPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
-        if (env.acceptsProfiles(JHipsterConstants.SPRING_PROFILE_DEVELOPMENT)) {
+        if (env.acceptsProfiles(ApplicationConstants.SPRING_PROFILE_DEVELOPMENT)) {
             log.error("Exception in {}.{}() with cause = \'{}\' and exception = \'{}\'", joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(), e.getCause() != null? e.getCause() : "NULL", e.getMessage(), e);
 

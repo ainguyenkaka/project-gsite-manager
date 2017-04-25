@@ -5,6 +5,7 @@ import com.gsite.app.domain.WebTemplate;
 import com.gsite.app.service.WebTemplateService;
 import com.gsite.app.web.rest.util.HeaderUtil;
 import com.gsite.app.web.rest.util.PaginationUtil;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,7 +71,6 @@ public class WebTemplateResource {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-
     @GetMapping("/web-templates/{id}")
     @Timed
     public ResponseEntity<WebTemplate> getWebTemplate(@PathVariable String id) {
@@ -95,12 +96,11 @@ public class WebTemplateResource {
 
     @GetMapping("/_search/web-templates")
     @Timed
-    public ResponseEntity<List<WebTemplate>> searchWebTemplates(@RequestParam String query, @RequestParam String field,@ApiParam Pageable pageable)
+    public ResponseEntity<List<WebTemplate>> searchWebTemplates(@RequestParam String query, @RequestParam String field)
         throws URISyntaxException {
         log.debug("REST request to search of WebTemplates");
-        Page<WebTemplate> page = webTemplateService.search(query,field,pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/_search/web-templates");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        List<WebTemplate> list = webTemplateService.search(query,field);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
 }

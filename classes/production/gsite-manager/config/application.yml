@@ -1,4 +1,12 @@
 
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 10000
+
 management:
     security:
         roles: ADMIN

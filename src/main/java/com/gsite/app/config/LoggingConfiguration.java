@@ -5,7 +5,7 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.LoggerContextListener;
 import ch.qos.logback.core.spi.ContextAwareBase;
-import io.github.jhipster.config.JHipsterProperties;
+
 import net.logstash.logback.appender.LogstashSocketAppender;
 import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
 import org.slf4j.Logger;
@@ -26,11 +26,11 @@ public class LoggingConfiguration {
     @Value("${server.port}")
     private String serverPort;
 
-    private final JHipsterProperties jHipsterProperties;
+    private final ApplicationProperties applicationProperties;
 
-    public LoggingConfiguration(JHipsterProperties jHipsterProperties) {
-        this.jHipsterProperties = jHipsterProperties;
-        if (jHipsterProperties.getLogging().getLogstash().isEnabled()) {
+    public LoggingConfiguration(ApplicationProperties applicationProperties) {
+        this.applicationProperties = applicationProperties;
+        if (applicationProperties.getLogging().getLogstash().isEnabled()) {
             addLogstashAppender(context);
 
             LogbackLoggerContextListener loggerContextListener = new LogbackLoggerContextListener();
@@ -47,8 +47,8 @@ public class LoggingConfiguration {
         logstashAppender.setContext(context);
         String customFields = "{\"app_name\":\"" + appName + "\",\"app_port\":\"" + serverPort + "\"}";
 
-        logstashAppender.setSyslogHost(jHipsterProperties.getLogging().getLogstash().getHost());
-        logstashAppender.setPort(jHipsterProperties.getLogging().getLogstash().getPort());
+        logstashAppender.setSyslogHost(applicationProperties.getLogging().getLogstash().getHost());
+        logstashAppender.setPort(applicationProperties.getLogging().getLogstash().getPort());
         logstashAppender.setCustomFields(customFields);
 
         ShortenedThrowableConverter throwableConverter = new ShortenedThrowableConverter();
@@ -61,7 +61,7 @@ public class LoggingConfiguration {
         AsyncAppender asyncLogstashAppender = new AsyncAppender();
         asyncLogstashAppender.setContext(context);
         asyncLogstashAppender.setName("ASYNC_LOGSTASH");
-        asyncLogstashAppender.setQueueSize(jHipsterProperties.getLogging().getLogstash().getQueueSize());
+        asyncLogstashAppender.setQueueSize(applicationProperties.getLogging().getLogstash().getQueueSize());
         asyncLogstashAppender.addAppender(logstashAppender);
         asyncLogstashAppender.start();
 

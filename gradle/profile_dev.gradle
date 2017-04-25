@@ -26,13 +26,5 @@ processResources {
             it.replace('#logback.loglevel#', logbackLoglevel)
         }
     }
-    filesMatching('**/bootstrap.yml') {
-        filter {
-            it.replace('#spring.profiles.active#', profiles)
-        }
-        filter {
-            it.replace('#project.version#', version)
-        }
-    }
 }
 

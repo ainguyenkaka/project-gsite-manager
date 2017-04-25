@@ -1,7 +1,8 @@
 package com.gsite.app.security.jwt;
 
+import com.gsite.app.config.ApplicationProperties;
 import com.gsite.app.security.AuthoritiesConstants;
-import io.github.jhipster.config.JHipsterProperties;
+
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,21 +32,21 @@ public class TokenProvider {
 
     private long tokenValidityInMillisecondsForRememberMe;
 
-    private final JHipsterProperties jHipsterProperties;
+    private final ApplicationProperties applicationProperties;
 
-    public TokenProvider(JHipsterProperties jHipsterProperties) {
-        this.jHipsterProperties = jHipsterProperties;
+    public TokenProvider(ApplicationProperties applicationProperties) {
+        this.applicationProperties = applicationProperties;
     }
 
     @PostConstruct
     public void init() {
         this.secretKey =
-            jHipsterProperties.getSecurity().getAuthentication().getJwt().getSecret();
+            applicationProperties.getSecurity().getAuthentication().getJwt().getSecret();
 
         this.tokenValidityInMilliseconds =
-            1000 * jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSeconds();
+            1000 * applicationProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSeconds();
         this.tokenValidityInMillisecondsForRememberMe =
-            1000 * jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSecondsForRememberMe();
+            1000 * applicationProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSecondsForRememberMe();
     }
 
     public String createToken(Authentication authentication, Boolean rememberMe) {

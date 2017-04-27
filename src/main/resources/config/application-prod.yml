@@ -38,6 +38,8 @@ application:
     mail:
         from: gsiteManager@localhost
         base-url: http://my-server-url-to-change
+    ribbon:
+            display-on-active-profiles: prod
     metrics:
         jmx.enabled: true
         graphite:

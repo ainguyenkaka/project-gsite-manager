@@ -42,3 +42,5 @@ application:
                 token-validity-in-seconds: 86400
     metrics:
         jmx.enabled: true
+    ribbon:
+            display-on-active-profiles: test

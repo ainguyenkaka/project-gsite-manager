@@ -69,6 +69,7 @@ public class ApplicationProperties {
         return ribbon;
     }
 
+
     public static class Async {
 
         private int corePoolSize = 2;
@@ -156,6 +157,10 @@ public class ApplicationProperties {
 
             private int backupCount = 1;
 
+            private String groupName = "gname";
+
+            private String groupPass = "gpass";
+
             public int getTimeToLiveSeconds() {
                 return timeToLiveSeconds;
             }
@@ -170,6 +175,22 @@ public class ApplicationProperties {
 
             public void setBackupCount(int backupCount) {
                 this.backupCount = backupCount;
+            }
+
+            public String getGroupName() {
+                return groupName;
+            }
+
+            public void setGroupName(String groupName) {
+                this.groupName = groupName;
+            }
+
+            public String getGroupPass() {
+                return groupPass;
+            }
+
+            public void setGroupPass(String groupPass) {
+                this.groupPass = groupPass;
             }
         }
 

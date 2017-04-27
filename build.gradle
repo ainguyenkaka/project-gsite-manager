@@ -131,6 +131,9 @@ repositories {
 
 dependencies {
 //    compile "com.gsite.app:gsite-jpa:latest"
+    compile "com.hazelcast:hazelcast:${hazelcast_version}"
+    compile "com.hazelcast:hazelcast-spring:${hazelcast_version}"
+    compile "com.hazelcast:hazelcast-client:${hazelcast_version}"
     compile "io.dropwizard.metrics:metrics-core"
     compile "io.dropwizard.metrics:metrics-jvm:" + dependencyManagement.managedVersions["io.dropwizard.metrics:metrics-core"]
     compile "io.dropwizard.metrics:metrics-servlet:" + dependencyManagement.managedVersions["io.dropwizard.metrics:metrics-core"]

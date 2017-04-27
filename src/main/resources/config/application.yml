@@ -53,3 +53,7 @@ application:
         license-url:
     ribbon:
         display-on-active-profiles: dev
+    cache:
+        hazelcast:
+            group-name: name
+            group-pass: pass

@@ -130,7 +130,7 @@ repositories {
 }
 
 dependencies {
-//    compile "com.gsite.app:gsite-jpa:latest"
+//    compile "com.gsite.app:gsite-jpa:${gsite_jpa_version}"
     compile "com.hazelcast:hazelcast:${hazelcast_version}"
     compile "com.hazelcast:hazelcast-spring:${hazelcast_version}"
     compile "com.hazelcast:hazelcast-client:${hazelcast_version}"

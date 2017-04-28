@@ -5,6 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableCircuitBreaker
-public class HystrixConfiguration {
+public class MicroserviceConfiguration {
 
 }

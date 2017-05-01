@@ -54,6 +54,7 @@ public class MicroserviceSecurityConfiguration extends WebSecurityConfigurerAdap
             .antMatchers(HttpMethod.GET,"/api/faq/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/_search/**").permitAll()
             .antMatchers(HttpMethod.GET,"/api/web-templates/**").permitAll()
+            .antMatchers(HttpMethod.GET,"/api/notifications/**").permitAll()
             .antMatchers(HttpMethod.GET,"/api/websites/domain/**").permitAll()
             .antMatchers("/api/**").hasAuthority(AuthoritiesConstants.MANAGER)
             .antMatchers("/management/health").permitAll()

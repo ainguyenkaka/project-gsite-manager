@@ -45,43 +45,7 @@ public class InitialSetupMigration {
 
     }
 
-
-    @ChangeSet(author = "initiator", id = "01-addWebsites", order = "02")
-    public void addWebsites(DB db) {
-        DBCollection templateCollection = db.getCollection("website");
-        templateCollection.createIndex("name");
-        templateCollection.insert(BasicDBObjectBuilder
-            .start("_id", "website-8")
-            .add("name", "The basic one")
-            .add("template", "basic-template")
-            .add("domain", "webone")
-            .add("user_id", "user-5")
-            .add("is_paid", true)
-            .add("created", new Date())
-            .get());
-        templateCollection.insert(BasicDBObjectBuilder
-            .start("_id", "website-9")
-            .add("name", "The latest one")
-            .add("template", "latest-template")
-            .add("domain", "webtwo")
-            .add("user_id", "user-5")
-            .add("is_paid", true)
-            .add("created", new Date())
-            .get());
-        templateCollection.insert(BasicDBObjectBuilder
-            .start("_id", "website-10")
-            .add("name", "The beauty")
-            .add("template", "beautiful-template")
-            .add("domain", "webthree")
-            .add("user_id", "user-5")
-            .add("is_paid", true)
-            .add("created", new Date())
-            .get());
-
-    }
-
-
-    @ChangeSet(author = "initiator", id = "03-addQuestions", order = "03")
+    @ChangeSet(author = "initiator", id = "01-addQuestions", order = "02")
     public void addQuestions(DB db) {
         DBCollection templateCollection = db.getCollection("question");
         templateCollection.createIndex("name");

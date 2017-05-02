@@ -1,5 +1,8 @@
 
 spring:
+    profiles:
+        active: prod
+        include: swagger
     devtools:
         restart:
             enabled: false
@@ -32,7 +35,7 @@ application:
     security:
         authentication:
             jwt:
-                secret: 8a1d3b6fa9e302c0415b6d650e9911443f953fd3
+                secret: 8a1d3b6fa9e302c0415b6d650e9911883f953fd3
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail:
@@ -61,3 +64,7 @@ application:
             queue-size: 512
         spectator-metrics:
             enabled: false
+    cache:
+        hazelcast:
+            network:
+                address: gsite-cache-manager

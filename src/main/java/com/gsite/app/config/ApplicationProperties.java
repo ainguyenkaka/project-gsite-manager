@@ -153,6 +153,8 @@ public class ApplicationProperties {
 
         public static class Hazelcast {
 
+            private final Network network = new Network();
+
             private int timeToLiveSeconds = 3600;
 
             private int backupCount = 1;
@@ -191,6 +193,23 @@ public class ApplicationProperties {
 
             public void setGroupPass(String groupPass) {
                 this.groupPass = groupPass;
+            }
+
+            public Network getNetwork() {
+                return network;
+            }
+
+            public static class Network {
+
+                private String address = "";
+
+                public String getAddress() {
+                    return address;
+                }
+
+                public void setAddress(String address) {
+                    this.address = address;
+                }
             }
         }
 

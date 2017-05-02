@@ -83,14 +83,13 @@ public class WebTemplateResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-   @DeleteMapping("/web-templates/{id}")
+    @DeleteMapping("/web-templates/{id}")
     @Timed
     public ResponseEntity<Void> deleteWebTemplate(@PathVariable String id) {
         log.debug("REST request to delete WebTemplate : {}", id);
-        if (webTemplateService.delete(id))
-            return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("webTemplate", id.toString())).build();
-        else
-            return ResponseEntity.badRequest().build();
+        webTemplateService.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("webTemplate", id.toString())).build();
+
     }
 
 
@@ -99,7 +98,7 @@ public class WebTemplateResource {
     public ResponseEntity<List<WebTemplate>> searchWebTemplates(@RequestParam String query, @RequestParam String field)
         throws URISyntaxException {
         log.debug("REST request to search of WebTemplates");
-        List<WebTemplate> list = webTemplateService.search(query,field);
+        List<WebTemplate> list = webTemplateService.search(query, field);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 

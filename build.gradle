@@ -124,13 +124,13 @@ repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/releases' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url 'http://repo.maven.apache.org/maven2' }
-//    maven {
-//        url "https://github.com/ainguyenkaka/gsite-jpa/raw/master"
-//    }
+    maven {
+        url "https://github.com/ainguyenkaka/gsite-jpa/raw/master"
+    }
 }
 
 dependencies {
-//    compile "com.gsite.app:gsite-jpa:${gsite_jpa_version}"
+    compile "com.gsite.app:gsite-jpa:${gsite_jpa_version}"
     compile "com.hazelcast:hazelcast:${hazelcast_version}"
     compile "com.hazelcast:hazelcast-spring:${hazelcast_version}"
     compile "com.hazelcast:hazelcast-client:${hazelcast_version}"

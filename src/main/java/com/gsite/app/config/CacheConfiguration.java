@@ -31,6 +31,7 @@ public class CacheConfiguration {
             applicationProperties.getCache().getHazelcast().getGroupName(),
             applicationProperties.getCache().getHazelcast().getGroupPass());
         clientConfig.setGroupConfig(groupConfig);
+        clientConfig.getNetworkConfig().addAddress(applicationProperties.getCache().getHazelcast().getNetwork().getAddress());
         return HazelcastClient.newHazelcastClient(clientConfig);
     }
 

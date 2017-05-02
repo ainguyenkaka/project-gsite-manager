@@ -16,7 +16,7 @@ public class TokenProviderTest {
 
     @Before
     public void setUp() {
-        secretKey = "8a1d3b6fa9e302c0415b6d650e9911443f953fd3";
+        secretKey = "8a1d3b6fa9e302c0415b6d650e9911883f953fd3";
     }
 
     @Test

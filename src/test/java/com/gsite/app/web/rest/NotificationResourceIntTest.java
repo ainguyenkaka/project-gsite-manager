@@ -121,19 +121,19 @@ public class NotificationResourceIntTest {
         assertThat(notificationList).hasSize(databaseSizeBeforeCreate);
     }
 
-    // @Test
-    // public void checkTitleIsRequired() throws Exception {
-    //     int databaseSizeBeforeTest = notificationRepository.findAll().size();
-    //     notification.setTitle(null);
+    @Test
+    public void checkTitleIsRequired() throws Exception {
+        int databaseSizeBeforeTest = notificationRepository.findAll().size();
+        notification.setTitle(null);
 
-    //     restNotificationMockMvc.perform(post("/api/notifications")
-    //         .contentType(TestUtil.APPLICATION_JSON_UTF8)
-    //         .content(TestUtil.convertObjectToJsonBytes(notification)))
-    //         .andExpect(status().isBadRequest());
+        restNotificationMockMvc.perform(post("/api/notifications")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(notification)))
+            .andExpect(status().isBadRequest());
 
-    //     List<Notification> notificationList = notificationRepository.findAll();
-    //     assertThat(notificationList).hasSize(databaseSizeBeforeTest);
-    // }
+        List<Notification> notificationList = notificationRepository.findAll();
+        assertThat(notificationList).hasSize(databaseSizeBeforeTest);
+    }
 
     @Test
     public void checkContentIsRequired() throws Exception {
@@ -163,18 +163,18 @@ public class NotificationResourceIntTest {
             .andExpect(jsonPath("$.[*].created").value(hasItem(sameInstant(DEFAULT_CREATED))));
     }
 
-    // @Test
-    // public void getNotification() throws Exception {
-    //     notificationRepository.save(notification);
+    @Test
+    public void getNotification() throws Exception {
+        notificationRepository.save(notification);
 
-    //     restNotificationMockMvc.perform(get("/api/notifications/{id}", notification.getId()))
-    //         .andExpect(status().isOk())
-    //         .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-    //         .andExpect(jsonPath("$.id").value(notification.getId()))
-    //         .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
-    //         .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
-    //         .andExpect(jsonPath("$.created").value(sameInstant(DEFAULT_CREATED)));
-    // }
+        restNotificationMockMvc.perform(get("/api/notifications/{id}", notification.getId()))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.id").value(notification.getId()))
+            .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
+            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
+            .andExpect(jsonPath("$.created").value(sameInstant(DEFAULT_CREATED)));
+    }
 
     @Test
     public void getNonExistingNotification() throws Exception {

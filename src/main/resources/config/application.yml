@@ -62,7 +62,7 @@ application:
         display-on-active-profiles: dev
     cache:
         hazelcast:
-            group-name: name
-            group-pass: pass
+            group-name: gname
+            group-pass: gpass
             network:
                 address: 127.0.0.1

@@ -10,8 +10,13 @@ spring:
             enabled: false
     data:
         mongodb:
-            uri: mongodb://mongos:27017
+            uri: mongodb://localhost:27017
             database: gsite
+    mail:
+        host: localhost
+        port: 25
+        username:
+        password:
     thymeleaf:
         cache: true
 
@@ -21,6 +26,11 @@ server:
         enabled: true
         mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json
         min-response-size: 1024
+
+payment:
+    paypal:
+        cancelUrl: http://localhost:8080/website-payment/
+        returnUrl: http://localhost:8080/website-payment/
 
 application:
     http:
@@ -34,15 +44,15 @@ application:
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail:
-        from: giftsiteforyou@gmail.com
-        base-url: http://gsite.cf
+        from: gsiteManager@localhost
+        base-url: http://localhost:8080
     ribbon:
             display-on-active-profiles: prod
     metrics:
         jmx.enabled: true
         graphite:
             enabled: false
-            host: gsite.cf
+            host: localhost
             port: 2003
             prefix: gsiteManager
         prometheus:
@@ -54,7 +64,7 @@ application:
     logging:
         logstash:
             enabled: false
-            host: gsite.cf
+            host: localhost
             port: 5000
             queue-size: 512
         spectator-metrics:

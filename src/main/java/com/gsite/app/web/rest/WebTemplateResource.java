@@ -31,7 +31,7 @@ public class WebTemplateResource {
 
     private final Logger log = LoggerFactory.getLogger(WebTemplateResource.class);
 
-    @Autowired
+    @Inject
     private WebTemplateService webTemplateService;
 
 

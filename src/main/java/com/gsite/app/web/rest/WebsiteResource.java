@@ -25,7 +25,7 @@ public class WebsiteResource {
 
     private final Logger log = LoggerFactory.getLogger(WebsiteResource.class);
 
-    @Autowired
+    @Inject
     private WebsiteService websiteService;
 
     @PostMapping("/websites")

@@ -8,30 +8,25 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.inject.Inject;
-import java.time.Instant;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GsiteManagerApp.class)
-@EnableCaching
 public class WebTemplateServiceCacheIntTest {
 
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String DEFAULT_NAME = "CCCCCCCCC";
 
-    private static final String DEFAULT_IMAGE = "AAAAAAAAAA";
+    private static final String DEFAULT_IMAGE = "CCCCCCCCC";
 
-    private static final String DEFAULT_CATEGORY = "AAAAAAAAAA";
+    private static final String DEFAULT_CATEGORY = "CCCCCCCCC";
 
-    private static final String DEFAULT_SOURCE = "AAAAAAAAAA";
+    private static final String DEFAULT_SOURCE = "CCCCCCCCC";
 
-    private static final String DEFAULT_SEARCH_QUERY = "AAAAA";
+    private static final String DEFAULT_SEARCH_QUERY = "CCCCC";
 
     private static final String DEFAULT_SEARCH_FIELD = "name";
 

@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
@@ -50,9 +51,6 @@ public class WebTemplateResourceIntTest {
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
-    @Inject
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
     private MockMvc restWebTemplateMockMvc;
 
     private WebTemplate webTemplate;
@@ -63,7 +61,6 @@ public class WebTemplateResourceIntTest {
         WebTemplateResource webTemplateResource = new WebTemplateResource();
         ReflectionTestUtils.setField(webTemplateResource, "webTemplateService", webTemplateService);
         this.restWebTemplateMockMvc = MockMvcBuilders.standaloneSetup(webTemplateResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
@@ -145,7 +142,7 @@ public class WebTemplateResourceIntTest {
     @Test
     public void getAllWebTemplates() throws Exception {
 
-        webTemplateRepository.save(webTemplate);
+        webTemplateService.save(webTemplate);
 
 
         restWebTemplateMockMvc.perform(get("/api/web-templates?sort=id,desc"))

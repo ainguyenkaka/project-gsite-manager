@@ -16,7 +16,7 @@ node {
 
     stage('backend tests') {
         try {
-            sh "./gradlew test -PnodeInstall --no-daemon"
+            sh "./gradlew test --no-daemon"
         } catch(err) {
             throw err
         } finally {
@@ -25,7 +25,7 @@ node {
     }
 
     stage('packaging') {
-        sh "./gradlew bootRepackage -x test -Pprod -PnodeInstall --no-daemon"
+        sh "./gradlew bootRepackage -x test -Pprod --no-daemon"
         archiveArtifacts artifacts: '**/build/libs/*.war', fingerprint: true
     }
 

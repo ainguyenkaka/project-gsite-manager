@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
@@ -57,9 +58,6 @@ public class QuestionResourceIntTest {
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
-    @Inject
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
     private MockMvc restQuestionMockMvc;
 
     private Question question;
@@ -70,7 +68,6 @@ public class QuestionResourceIntTest {
         QuestionResource questionResource = new QuestionResource();
         ReflectionTestUtils.setField(questionResource, "questionService", questionService);
         this.restQuestionMockMvc = MockMvcBuilders.standaloneSetup(questionResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 

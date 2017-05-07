@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
@@ -55,9 +56,6 @@ public class FeedbackResourceIntTest {
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
-    @Inject
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
     private MockMvc restFeedbackMockMvc;
 
     private Feedback feedback;
@@ -68,7 +66,6 @@ public class FeedbackResourceIntTest {
         FeedbackResource feedbackResource = new FeedbackResource();
         ReflectionTestUtils.setField(feedbackResource, "feedbackService", feedbackService);
         this.restFeedbackMockMvc = MockMvcBuilders.standaloneSetup(feedbackResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 

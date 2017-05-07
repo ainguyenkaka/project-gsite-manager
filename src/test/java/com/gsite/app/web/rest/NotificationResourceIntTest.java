@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -54,9 +54,6 @@ public class NotificationResourceIntTest {
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
-    @Inject
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
     private MockMvc restNotificationMockMvc;
 
     private Notification notification;
@@ -67,7 +64,6 @@ public class NotificationResourceIntTest {
         NotificationResource notificationResource = new NotificationResource(notificationService);
         ReflectionTestUtils.setField(notificationResource, "notificationService", notificationService);
         this.restNotificationMockMvc = MockMvcBuilders.standaloneSetup(notificationResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 

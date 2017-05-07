@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
@@ -60,9 +61,6 @@ public class WebsiteResourceIntTest {
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
-    @Inject
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
     private MockMvc restWebsiteMockMvc;
 
     private Website website;
@@ -75,7 +73,6 @@ public class WebsiteResourceIntTest {
         WebsiteResource websiteResource = new WebsiteResource();
         ReflectionTestUtils.setField(websiteResource, "websiteService", websiteService);
         this.restWebsiteMockMvc = MockMvcBuilders.standaloneSetup(websiteResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
@@ -285,6 +282,7 @@ public class WebsiteResourceIntTest {
 
     @Test
     public void updateNonExistingWebsite() throws Exception {
+        website.setDomain(DEFAULT_DOMAIN + DEFAULT_DOMAIN);
         int databaseSizeBeforeUpdate = websiteRepository.findAll().size();
 
         restWebsiteMockMvc.perform(put("/api/websites")

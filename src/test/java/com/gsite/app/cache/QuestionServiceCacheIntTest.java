@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.inject.Inject;
@@ -20,16 +19,15 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = GsiteManagerApp.class)
-@EnableCaching
 public class QuestionServiceCacheIntTest {
 
-    private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
+    private static final String DEFAULT_CONTENT = "CCCCCCCCC";
 
-    private static final String DEFAULT_ANSWER = "AAAAAAAAAA";
+    private static final String DEFAULT_ANSWER = "CCCCCCCCC";
 
     private static final ZonedDateTime DEFAULT_CREATED = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
 
-    private static final String DEFAULT_USER_ID = "AAAAAAAAAA";
+    private static final String DEFAULT_USER_ID = "CCCCCCCCC";
 
 
     @Inject

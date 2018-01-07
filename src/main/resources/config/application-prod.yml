@@ -24,7 +24,7 @@ server:
 
 application:
     http:
-        version: V_1_1
+        version: V_2_0
         cache:
             timeToLiveInDays: 1461
     security:
